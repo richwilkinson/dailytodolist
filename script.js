@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 const measure = false;
 //Time kept in console log
 const m = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -20,8 +19,15 @@ let planText;
 const day = moment().format('ll');
 console.log(day);
 //attaches date to header
-let $timeHeader = $('#currentDay')
-$timeHeader.text(day);
+let $dayHeader = $('#currentDay');
+$dayHeader.text(day);
+
+const cTime = moment().format('LT');
+console.log(cTime);
+
+let $timeHeader = $('#currentTime');
+$timeHeader.text(cTime);
+
 
 
 //const saveIcon = 'save-regular.svg';
@@ -54,12 +60,11 @@ console.log($rowDiv);
 
 //creates column for time display
 let $colTimeDiv = document.createElement('div');
-$($colTimeDiv).addClass('col-s-2');
+$($colTimeDiv).addClass('col-md-2');
 
 //creates element for time display on html
-const $timeSpan = document.createElement('span');
-$($timeSpan).attr('class','time-block');
-$($timeSpan).attr('class','hour');
+const $timeSpan = document.createElement('section');
+$($timeSpan).attr('class','hour time-block');
 
 //asigns time 'am' or 'pm'
 let shownTime = 0;
@@ -82,11 +87,11 @@ $rowDiv.append($colTimeDiv);
 $colTimeDiv.append($timeSpan);
 
 //creating text input area for plans
-let $dailySpan = document.createElement('input');
+let $dailySpan = document.createElement('textarea');
 $($dailySpan).attr('id', `input-${index}`);
 $($dailySpan).attr('hour-index', index);
 $($dailySpan).attr('type','text');
-$($dailySpan).attr('class','dailyStuff');
+$($dailySpan).attr('class','description');
 
 //assigning index for each input
 $($dailySpan).val(planText[index]);
@@ -94,7 +99,7 @@ console.log($dailySpan);
 
 //creating column for plan text area
 let $colDailyDiv = document.createElement('section');
-$($colDailyDiv).addClass('col-s-8');
+$($colDailyDiv).addClass('col-md-8');
 
 //appending column onto row and input into column
 $rowDiv.append($colDailyDiv);
@@ -102,7 +107,7 @@ $($colDailyDiv).append($dailySpan);
 
 //creating save area div
 let $colSaveDiv = document.createElement('div');
-$($colSaveDiv).addClass('col-s-2');
+$($colSaveDiv).addClass('col-md-2');
 
 //creating save button element
 let $saveBtn = document.createElement('button');
@@ -119,20 +124,18 @@ $colSaveDiv.append($saveBtn);
 
 $($plansDiv).append($rowDiv);
 
+rowColor(hour,$dailySpan)
 };
 
 //function for changing of row colors according to time
-rowColors = (_$index,hour) => {
+function rowColor (hour,$dailySpan) {
 console.log("rowColor ", hour24, hour);
 if (hour < hour24) {
-console.log("lessThan");
-$(input).addClass('.present')
+    $($dailySpan).addClass('past')
 } else if (hour > hour24) {
-    console.log(greaterThan);
-    $(input).addClass('.future')
+    $($dailySpan).addClass('future')
 } else {
-    console.log('equal');
-    $(input).addClass('.past');
+    $($dailySpan).addClass('present');
 };   
 };
 
