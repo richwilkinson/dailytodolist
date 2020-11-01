@@ -137,9 +137,9 @@ $(input).addClass('.present')
 };
 
 //event listener for save button
-$("button").click (function(event) {
+$("button").click (function(event)  {
     event.preventDefault();
-    let $index = $(this).attr('save-id')
+    let $index = $(this).attr('save-id');
     let $inputId = '#input-'+$index;
     let $value = $($inputId).val();
 
